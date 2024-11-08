@@ -14,6 +14,19 @@ return new class extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->string('payment_method_name');
+
+            $table->json('credentials');
+
+            $table->boolean('is_sandbox')
+                ->nullable()
+                ->default(true);
+
+            $table->boolean('is_active')
+                ->nullable()
+                ->default(false);
+                
         });
     }
 
