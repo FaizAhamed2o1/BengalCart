@@ -14,10 +14,17 @@ Route::prefix('/categories')
             ->name('categories.store');
         
         // Update an existing category
-        Route::put('/{id}', [CategoryController::class, 'update'])
-            ->name('categories.update');
+        Route::put('/update/{id}', [
+            CategoryController::class, 'update'
+        ])->name('categories.update');
         
         // Delete a category
-        Route::delete('/{id}', [CategoryController::class, 'destroy'])
-            ->name('categories.destroy');
+        Route::delete('/{id}', [
+            CategoryController::class, 'destroy'
+        ])->name('categories.destroy');
+
+        // getting category wise sub categories
+        Route::get('/category-wise-sub/{categoryId}', [
+            CategoryController::class, 'getCategoryWiseSub'
+        ])->name('categories.catWiseSub');
     });

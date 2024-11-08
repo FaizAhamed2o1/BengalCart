@@ -1,11 +1,10 @@
 <?php
 
-
-namespace App\Http\Controllers\Category\Requests;
+namespace App\Http\Controllers\SubCategory\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class SubCategoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,7 +14,8 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:1'
+            'name' => 'required',
+            'category_id' => 'required'
         ];
     }
 }

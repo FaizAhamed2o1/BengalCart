@@ -20,7 +20,14 @@ class CategoryService
             ->paginate();
     }
 
-    public function createCategory(array $data)
+    public function getCategoryWithSubCategories($categoryId)
+    {
+        return $this->model->where('id', $categoryId)
+            ->with('subcategories')
+            ->paginate();
+    }
+
+    public function createCategory( array $data )
     {
         return $this->model
             ->create($data);

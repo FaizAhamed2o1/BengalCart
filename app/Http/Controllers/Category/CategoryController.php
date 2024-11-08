@@ -62,8 +62,10 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, string $id): JsonResponse
     {
+        // dd($request->all());
         $data = $request->validated();
-        $this->categoryService->updateCategory($id, $data);
+        $this->categoryService
+            ->updateCategory($id, $data);
 
         return response()->json([
             'success' => true,
@@ -86,4 +88,21 @@ class CategoryController extends Controller
             'message' => 'Category deleted successfully'
         ], 200);
     }
+
+    /**
+     * getting cateogory wise sub categories
+     * @param string categoryId
+     *  @return \Illuminate\Http\JsonResponse
+     */
+
+     public function getCategoryWiseSub( $categoryId )
+     {
+        $catWiseSub = $this->categoryService
+            ->getCategoryWithSubCategories($categoryId);
+
+        return response()->json([
+            'success' => true,
+            'data' => $catWiseSub
+        ], 200);
+     }
 }
