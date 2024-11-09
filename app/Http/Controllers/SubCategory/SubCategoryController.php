@@ -22,7 +22,7 @@ class SubCategoryController extends Controller
 
     /**
      * Display a listing of all subcategories.
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(): JsonResponse
@@ -80,6 +80,7 @@ class SubCategoryController extends Controller
 
     public function update(SubCategoryRequest $request, string $id): JsonResponse
     {
+        // dd($request->all());
         $data = $request->validated();
         $this->subCategoryService->updateCategory($id, $data);
 
