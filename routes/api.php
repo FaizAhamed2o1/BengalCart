@@ -17,3 +17,7 @@ require_once base_path(
     'app/Http/Controllers/Campaign/Routes/routes.php'
 );
 
+// colors
+require_once base_path(
+    'app/Http/Controllers/Color/Routes/routes.php'
+);
