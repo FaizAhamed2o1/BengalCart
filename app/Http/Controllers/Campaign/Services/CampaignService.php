@@ -16,7 +16,7 @@ class CampaignService
     public function getCampaigns()
     {
         return $this->model
-            ->with('products')
+            // ->with('products')
             ->paginate(15);
 
     }

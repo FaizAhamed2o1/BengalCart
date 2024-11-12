@@ -68,7 +68,7 @@ class CampaignController extends Controller
         {
             foreach( $data['product_ids'] as $productId )
             {
-                $campaign->attach($productId);
+                $campaign->products()->attach($productId);
             }
 
         }
@@ -95,7 +95,7 @@ class CampaignController extends Controller
         {
             foreach( $data['product_ids'] as $productId )
             {
-                $campaign->attach($productId);
+                $campaign->products()->attach($productId);
             }
         }
 

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('campaign_name');
+            $table->string('campaign_name')
+                ->unique();
         });
     }
 

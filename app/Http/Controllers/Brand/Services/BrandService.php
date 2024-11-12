@@ -37,4 +37,13 @@ class BrandService
         $brand = $this->model->findOrFail($id);
         return $brand->delete();
     }
+
+    // getting brand wise products
+    public function getBrandWiseProducts( $brandId )
+    {
+        return $this->model->where('id', $brandId)
+            ->with('products')
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
+    }
 }
