@@ -3,6 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// auth routes
+require_once base_path(
+    'app/Http/Controllers/Auth/Routes/routes.php'
+);
+
 // category path
 require_once base_path(
     'app/Http/Controllers/Category/Routes/routes.php'
