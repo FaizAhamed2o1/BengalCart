@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
             $table->decimal('per_piece_price')
                 ->nullable();
-                
-            $table->decimal('cart_total');
+
+            $table->decimal('cart_total')->nullable();
 
         });
     }
