@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('cart')->group(function () {
-    Route::post('/add', [CartController::class, 'addToCart']);
-    Route::delete('/remove/{productId}', [CartController::class, 'removeFromCart']);
-    Route::get('/view', [CartController::class, 'viewCart']);
-    Route::delete('/clear', [CartController::class, 'clearCart']);
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.store');
+    Route::put('/update-cart/{itemId}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/delete-cart/{itemId}', [CartController::class, 'destroy'])->name('cart.delete');
 });

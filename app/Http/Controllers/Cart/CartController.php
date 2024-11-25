@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Cart;
 
+use App\Http\Controllers\Cart\Requests\UpdateCartRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Cart\Services\CartService;
-use App\Http\Controllers\Cart\Requests\CartRequest;
+use App\Http\Controllers\Cart\Requests\StoreCartRequest;
 
 
 class CartController extends Controller
@@ -17,36 +19,29 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function addToCart(CartRequest $request)
+    public function index(): JsonResponse
+    {
+        $cart = $this->cartService->getCart(auth()->user());
+        return response()->json($cart);
+    }
+
+    public function store(StoreCartRequest $request): JsonResponse
     {
 //        dd($request->all());
-
-        $cart = $this->cartService->addToCart(
-            $request->input('product_ids'),
-            $request->input('quantity')
-        );
-
-        return response()->json(['message' => 'Product added to cart', 'cart' => $cart]);
+        $cartItem = $this->cartService->addItems(auth()->user(), $request->validated());
+        return response()->json($cartItem, 201);
     }
 
-    public function removeFromCart(int $productId)
+    public function update(UpdateCartRequest $request, $itemId): JsonResponse
     {
-        $this->cartService->removeFromCart($productId);
+        $updatedItem = $this->cartService->updateItem(auth()->user(), $itemId, $request->validated());
 
-        return response()->json(['message' => 'Product removed from cart']);
+        return response()->json($updatedItem);
     }
 
-    public function viewCart()
+    public function destroy($itemId): JsonResponse
     {
-        $cartItems = $this->cartService->getCartItems();
-
-        return response()->json(['cart_items' => $cartItems]);
-    }
-
-    public function clearCart()
-    {
-        $this->cartService->clearCart();
-
-        return response()->json(['message' => 'Cart cleared']);
+        $this->cartService->removeItem(auth()->user(), $itemId);
+        return response()->json(['message' => 'Item removed'], 200);
     }
 }

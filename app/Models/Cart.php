@@ -9,15 +9,20 @@ class Cart extends Model
     protected $table = 'carts';
 
     protected $fillable = [
-        'quantity',
-        'per_piece_price',
+        'user_id',
+        'session_id',
+        'status',
         'cart_total'
     ];
 
-    public function products()
+    public function items()
     {
-        return $this->belongsToMany(Product::class, 'cart_products');
+        return $this->hasMany(CartItem::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

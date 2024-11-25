@@ -5,52 +5,94 @@ namespace App\Http\Controllers\Cart\Services;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\User;
 
 class CartService
 {
-    public function addToCart(array $productIds, int $quantity): Cart
+
+    public function getCart($userId)
     {
-        $cart = Cart::create([
-            'quantity' => $quantity,
+        return Cart::with('items.product')
+            ->where('user_id', $userId)
+            ->where('status', 'active')
+            ->firstOrCreate(['user_id' => $userId, 'status' => 'active']);
+    }
+    public function addItems($user, $items)
+    {
+
+        $cart = $this->getCart($user);
+
+        $items = $items['items'];
+        foreach ($items as $data) {
+
+            $product = Product::findOrFail($data['product_id']);
+
+            // checking validation
+            if (!isset($data['product_id']) || !isset($data['quantity'])) {
+                throw new \Exception("Invalid item data: product_id and quantity are required.");
+            }
+            // checking stock
+//            if ($product->stock_amount < $data['quantity']) {
+//                throw new \Exception("Not enough stock available for product: {$product->name}");
+//            }
+
+            $price = $product->selling_price;
+            $subTotal = $price * $data['quantity'];
+
+            $cart->items()->updateOrCreate(
+                ['product_id' => $data['product_id']],
+                [
+                    'quantity' => $data['quantity'],
+                    'sub_total' => $subTotal
+                ]
+            );
+        }
+
+        // Update cart total
+
+        $cartTotal = $cart->items->sum('sub_total');
+        $cart->update(['cart_total' => $cartTotal]);
+
+        return [
+            'items' => $cart->items,
+            'cart_total' => $cartTotal
+        ];
+    }
+
+    public function updateItem($user, $itemId, $data)
+    {
+        $cart = $this->getCart($user);
+
+        $item = $cart->items()->findOrFail($itemId);
+        $product = $item->product;
+
+        // Check if enough stock is available
+        if ($product->stock < $data['quantity']) {
+            throw new \Exception("Not enough stock available.");
+        }
+
+        // Calculate the new subtotal for the item
+        $price = $product->selling_price;
+        $subTotal = $price * $data['quantity'];
+
+        $item->update([
+            'quantity' => $data['quantity'],
+            'sub_total' => $subTotal
         ]);
 
-        foreach( $productIds as $productId )
-        {
-            $product = Product::findOrFail($productId);
-            $cart->products()->attach($productId);
-            $cart->per_piece_price = $product->selling_price;
-        }
-        $cart->per_piece_price = $product->selling_price;
-        $cart->cart_total = $cart->per_piece_price * $quantity;
+        $cartTotal = $cart->items->sum('sub_total');
+        $cart->update(['cart_total' => $cartTotal]);
 
-        $cart->save();
-
-        return $cart;
+        return [
+            'item' => $item,
+            'cart_total' => $cartTotal
+        ];
     }
 
-    public function removeFromCart(int $cartId, int $productId): bool
+
+    public function removeItem($user, $itemId)
     {
-        // Find the cart by its ID
-        $cart = Cart::findOrFail($cartId);
-        $product = Product::findOrFail($productId);
-
-        // Detach the product from the cart
-        $cart->products()->detach($productId);
-
-        $cart->cart_total -= $product->per_piece_price;
-
-        $cart->save();
-
-        return true;
-    }
-
-    public function getCartItems()
-    {
-        return Cart::with('product')->get();
-    }
-
-    public function clearCart(): bool
-    {
-        return Cart::truncate();
+        $cart = $this->getCart($user);
+        $cart->items()->findOrFail($itemId)->delete();
     }
 }
