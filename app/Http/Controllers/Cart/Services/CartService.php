@@ -10,11 +10,8 @@ class CartService
 {
     public function addToCart(array $productIds, int $quantity): Cart
     {
-//        dd("asdd");
         $cart = Cart::create([
             'quantity' => $quantity,
-//            'per_piece_price' => '',
-//            'cart_total' => ''
         ]);
 
         foreach( $productIds as $productId )
