@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->foreignIdFor(\App\Models\User::class)
-                ->nullable();
-            $table->integer('session_id')
-                ->nullable();
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Cart::class);
 
             $table->enum('status', [
-                'active', 'completed', 'abandoned'
+                'pending', 'paid', 'shipped'
             ]);
 
-            $table->decimal('cart_total', 10, 2)->default(0.00);
+            $table->decimal('total', 10, 2);
+
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('orders');
     }
 };
