@@ -38,3 +38,6 @@ require_once base_path(
 );
 
 // orders routes
+require_once base_path(
+    'app/Http/Controllers/Order/Routes/routes.php'
+);
