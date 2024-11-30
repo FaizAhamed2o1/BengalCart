@@ -2,7 +2,7 @@ import React from "react";
 import HeaderSearchBar from "../HeaderSearchBar/HeaderSearchBar";
 import HeaderSignInOrRegister from "../HeaderSignInOrRegister/HeaderSignInOrRegister";
 import { CiShoppingCart } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -12,7 +12,9 @@ const Header = () => {
     return (
         <div className="bg-customBlack sticky top-0 z-40 w-full py-3">
             <div className="custom-container flex items-center gap-8">
-                <h2 className="text-3xl text-white">Bengal Cart</h2>
+                <h2 className="text-3xl text-white">
+                    <Link to={"/"}>Bengal Cart</Link>
+                </h2>
 
                 <HeaderSearchBar></HeaderSearchBar>
 

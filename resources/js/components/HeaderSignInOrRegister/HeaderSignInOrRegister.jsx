@@ -6,16 +6,32 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { itemsWithLogos } from "../../data/HeaderDropdownItems/HeaderDropdownItems";
 import HeaderSignInDropdownItems from "../HeaderSignInDropdownItems/HeaderSignInDropdownItems";
 import LoginRegistrationModal from "../LoginRegistrationModal/LoginRegistrationModal";
+import Utils from "@/Utils.jsx";
 
 const HeaderSignInOrRegister = () => {
     const [showContent, setShowContent] = useState(false);
     const menuRef = useRef(null); // Ref for the menu container
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [ loginStatus, setLoginStatus ] = useState(false)
 
     const handleCloseModal = () => setShowModal(false);
     const handleOpenModal = () => setShowModal(true);
 
+    const { token, user } = Utils()
+
+    const getNickNameFromGmail = (email) => {
+        if (email.endsWith("@gmail.com")) {
+            return email.split("@gmail.com")[0]
+        }
+        return email;
+    }
+
     useEffect(() => {
+
+        const isLoggedIn = !!token
+
+        isLoggedIn ? setLoginStatus(true) : setLoginStatus(false)
+
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setShowContent(false);
@@ -38,13 +54,19 @@ const HeaderSignInOrRegister = () => {
 
                     <div className="text-xs">
                         <p>Welcome</p>
-
-                        <h3 className="flex items-start font-semibold">
-                            Sign in / Register
-                            <span className="text-xl">
-                                <MdOutlineKeyboardArrowDown />
+                        {
+                            loginStatus ? (
+                                <p>Welcome {getNickNameFromGmail(user.email)}</p>
+                            ) : (
+                                <h3 className="flex items-start font-semibold">
+                                    Sign in / Register
+                                    <span className="text-xl">
+                                <MdOutlineKeyboardArrowDown/>
                             </span>
-                        </h3>
+                                </h3>
+                            )
+                        }
+
                     </div>
                 </div>
             </div>
@@ -96,6 +118,7 @@ const HeaderSignInOrRegister = () => {
             </AnimatePresence>
 
             {/* shows modal when we click the trigger button */}
+
             {showModal && (
                 <LoginRegistrationModal
                     handleCloseModal={handleCloseModal}
