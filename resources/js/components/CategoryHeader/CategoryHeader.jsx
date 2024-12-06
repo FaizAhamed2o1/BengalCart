@@ -28,11 +28,11 @@ export default function CategoryHeader () {
             <div
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                className="text-lg flex items-center gap-4 bg-white rounded-full shadow-md p-2 w-[220px] justify-center cursor-pointer transition-all delay-150 hover:font-bold">
+                className="text-md flex items-center gap-4 bg-white rounded-full shadow-md p-2 w-[220px] justify-center cursor-pointer transition-all delay-150 hover:font-bold">
                 <CiMenuBurger
                     className="cursor-pointer text-xl"
                 />
-                Categories
+                CATEGORIES
                 <MdOutlineKeyboardArrowDown className="cursor-pointer text-xl"/>
 
             </div>
@@ -48,7 +48,7 @@ export default function CategoryHeader () {
                 {categories.map((category, index) => (
                     <div
                         key={index}
-                        className="pointer-cursor text-white text-md transition-all delay-50 rounded-full hover:bg-gray-50 hover:text-black p-2 w-[140px] text-center"
+                        className="pointer-cursor text-white text-sm transition-all delay-50 rounded-full hover:bg-gray-50 hover:text-black p-2 w-[140px] text-center"
                     >
                         <Link to={"/"}>{category}</Link>
                     </div>
