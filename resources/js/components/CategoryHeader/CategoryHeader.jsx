@@ -24,7 +24,7 @@ export default function CategoryHeader () {
     const handleMouseLeave = () => setDropdown(false);
 
     return (
-        <div className="w-full h-full flex items-center gap-5 container md:mx-[10rem] my-3">
+        <div className="p-5 w-full h-full flex items-center justify-start gap-5 container mx-0 my-3">
             <div
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
