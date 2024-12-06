@@ -6,8 +6,6 @@ import MobileHeader from "../../components/Header/MobileHeader.jsx";
 const Root = () => {
     return (
         <div>
-            {/*<MobileHeader />*/}
-            {/*<Header></Header>*/}
             <div className="block md:hidden">
                 <MobileHeader/>
             </div>
