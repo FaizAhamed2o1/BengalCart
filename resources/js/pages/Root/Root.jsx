@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import { Outlet } from "react-router-dom";
 import MobileHeader from "../../components/Header/MobileHeader.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 
 const Root = () => {
     return (
@@ -14,6 +15,10 @@ const Root = () => {
             </div>
 
             <Outlet></Outlet>
+
+            <div>
+                <Footer/>
+            </div>
         </div>
     );
 };
