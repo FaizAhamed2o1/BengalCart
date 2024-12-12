@@ -17,8 +17,8 @@
                   </button>
                   <div x-show="open" x-cloak class="bg-gray-800">
                       <a href="{{route('user')}}" class="block px-6 py-2 hover:bg-blue-600">All Users</a>
-                      <a href="#" class="block px-6 py-2 hover:bg-blue-600">Add User</a>
-                      <a href="#" class="block px-6 py-2 hover:bg-blue-600">User Settings</a>
+                      <a href="{{route('user')}}" class="block px-6 py-2 hover:bg-blue-600">Add User</a>
+                      <a href="{{route('user')}}" class="block px-6 py-2 hover:bg-blue-600">User Settings</a>
                   </div>
               </div>
 
@@ -44,7 +44,7 @@
                       <span class="material-icons ml-auto" :class="open ? 'rotate-180' : ''">expand_more</span>
                   </button>
                   <div x-show="open" x-cloak class="bg-gray-800">
-                      <a href="/allUser.html" class="block px-6 py-2 hover:bg-blue-600">Manage Brand</a>
+                      <a href="{{route('brand')}}" class="block px-6 py-2 hover:bg-blue-600">Manage Brand</a>
                       {{-- <a href="#" class="block px-6 py-2 hover:bg-blue-600"></a> --}}
                       {{-- <a href="#" class="block px-6 py-2 hover:bg-blue-600">User Settings</a> --}}
                   </div>

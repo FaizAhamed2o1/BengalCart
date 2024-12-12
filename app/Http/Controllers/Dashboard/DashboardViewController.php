@@ -11,11 +11,37 @@ class DashboardViewController extends Controller
         return view('dashboard.main.dashboard');
     }
 
+    // User
     public function user(){
         return view('dashboard.user.index');
     }
+    public function editUser(){
+        return view('dashboard.user.update');
+    }
+    public function createUser(){
+        return view('dashboard.user.create');
+    }
+
+    // Category
     public function category(){
         return view('dashboard.category.index');
+    }
+    public function createCategory(){
+        return view('dashboard.category.create');
+    }
+    public function editCategory(){
+        return view('dashboard.category.update');
+    }
+
+    // Brand
+    public function brand(){
+        return view('dashboard.brand.index');
+    }
+    public function createBrand(){
+        return view('dashboard.brand.create');
+    }
+    public function editBrand(){
+        return view('dashboard.brand.update');
     }
 
     // Product
