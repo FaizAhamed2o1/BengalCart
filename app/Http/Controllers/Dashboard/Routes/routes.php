@@ -15,7 +15,7 @@ Route::prefix('dashboard')->group(function() {
 
     Route::get('/category', [DashboardViewController::class, 'category'])->name('category');
     Route::get('/create/category', [DashboardViewController::class, 'createCategory'])->name('create.category');
-    Route::get('/edit/category', [DashboardViewController::class, 'editCategory'])->name('edit.category');
+    Route::get('/edit/category/{categoryId}', [DashboardViewController::class, 'editCategory'])->name('edit.category');
 
     Route::get('/brand', [DashboardViewController::class, 'brand'])->name('brand');
     Route::get('/create/brand', [DashboardViewController::class, 'createBrand'])->name('create.brand');

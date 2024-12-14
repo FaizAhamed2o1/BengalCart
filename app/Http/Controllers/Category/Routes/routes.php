@@ -14,7 +14,7 @@ Route::prefix('/categories')
             ->name('categories.store');
         
         // Update an existing category
-        Route::put('/update/{id}', [
+        Route::post('/update/{id}', [
             CategoryController::class, 'update'
         ])->name('categories.update');
         

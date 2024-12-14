@@ -72,6 +72,13 @@ class CategoryController extends Controller
     {
         // dd($request->all());
         $data = $request->validated();
+
+        if( $request->hasFile('thumbnail') )
+        {
+            $path = $request->file('thumbnail')->store('categories', 'public');
+            $data['thumbnail'] = $path;
+        }
+        
         $this->categoryService
             ->updateCategory($id, $data);
 

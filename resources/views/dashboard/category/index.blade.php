@@ -43,7 +43,7 @@
                                 </th>
                                 <td class="px-2 py-2 sm:px-4 sm:py-3">{{ $category->name }}</td>
                                 <td class="px-2 py-2 sm:px-4 sm:py-3">
-                                    <a href="{{ route('edit.category') }}"
+                                    <a href="{{ route('edit.category', $category->id) }}"
                                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2 mb-2 inline-block dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
                                         Edit
                                     </a>

@@ -39,8 +39,14 @@ class DashboardViewController extends Controller
         $breadcrumbs = generateBreadcrumbs();
         return view('dashboard.category.create', compact('breadcrumbs'));
     }
-    public function editCategory(){
-        return view('dashboard.category.update');
+    public function editCategory($categoryId)
+    {
+        $breadcrumbs = generateBreadcrumbs();
+        $category = $this->categoryService->getCategoryById($categoryId);
+        return view('dashboard.category.update', [
+            'breadcrumbs' => $breadcrumbs,
+            'category' => $category
+        ]);
     }
 
     // Brand
