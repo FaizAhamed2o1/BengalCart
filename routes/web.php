@@ -9,3 +9,9 @@ Route::get('/', function () {
 require_once base_path(
   'app/Http/Controllers/Dashboard/Routes/routes.php'
 );
+
+
+// categories path
+require_once base_path(
+    'app/Http/Controllers/Category/Routes/routes.php'
+);
