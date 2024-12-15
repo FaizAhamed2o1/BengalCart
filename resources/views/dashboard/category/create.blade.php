@@ -6,7 +6,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-4 sm:p-6 overflow-auto">
         <div class="flex items-center justify-between my-3">
-            @include('dashboard.layout.breadcrumb', [ 'breadcrumbs' => $breadcrumbs ])
+            @include('dashboard.layout.breadcrumb', ['breadcrumbs' => $breadcrumbs])
             <h1 class="text-xl sm:text-2xl font-semibold mb-4 text-center">Create Category</h1>
         </div>
 
@@ -20,8 +20,8 @@
                         Category Name
                     </label>
                     <input type="text" id="category_name" name="name"
-                           class="w-full shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
-                           placeholder="Enter Category Name" required />
+                        class="w-full shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                        placeholder="Enter Category Name" required />
                 </div>
 
                 <!-- Category Thumbnail -->
@@ -30,37 +30,49 @@
                         Category Thumbnail
                     </label>
                     <input type="file" id="thumbnail" name="thumbnail"
-                           class="w-full shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
-                           required />
+                        class="w-full shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                        required />
                     <div id="imagePreview" class="mt-3">
-                        <img id="previewImg" src="" alt="Thumbnail Preview" class="hidden w-32 h-32 object-cover rounded-lg">
+                        <img id="previewImg" src="" alt="Thumbnail Preview"
+                            class="hidden w-32 h-32 object-cover rounded-lg">
                     </div>
                 </div>
+
+                <div class="text-red-500 text-sm" id="errorContainer">*</div>
 
                 <!-- Buttons -->
                 <div class="flex flex-col sm:flex-row sm:justify-center gap-3">
                     <button type="button" id="saveCategory"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+                        class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+                        <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 mr-3 text-white"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                        </svg>
                         Save
                     </button>
                     <a href="{{ route('category') }}"
-                       class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
                         Back
                     </a>
                 </div>
+
             </form>
 
         </div>
     </main>
 
-    <script>
-        $(document).ready(function () {
+    {{-- <script>
+        $(document).ready(function() {
+            const errorContainer = $('#errorContainer');
+            errorContainer.hide();
             // Preview the uploaded image
-            $('#thumbnail').on('change', function (e) {
+            $('#thumbnail').on('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
                         $('#previewImg').attr('src', e.target.result).removeClass('hidden');
                     };
                     reader.readAsDataURL(file);
@@ -68,27 +80,82 @@
             });
 
             // Save the category using Axios
-            $('#saveCategory').on('click', function () {
+            $('#saveCategory').on('click', function() {
                 const formData = new FormData();
                 formData.append('name', $('#category_name').val());
                 formData.append('thumbnail', $('#thumbnail')[0].files[0]);
 
                 axios.post('{{ route('categories.store') }}', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                     .then(response => {
-                        alert(response.data.message);
+
                         window.location.href = '{{ route('category') }}';
                     })
                     .catch(error => {
-                        if (error.response && error.response.data.errors) {
-                            let errors = error.response.data.errors;
-                            alert(Object.values(errors).join('\n'));
-                        } else {
-                            alert('Something went wrong.');
+                        let errors = error.response.data.errors;
+                        errorContainer.show();
+                        errorContainer.text("*" + Object.values(errors).join('\n'));
+                    });
+            });
+        });
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            const errorContainer = $('#errorContainer');
+            const saveButton = $('#saveCategory');
+            const loadingSpinner = $('#loadingSpinner');
+            errorContainer.hide();
+
+            $('#thumbnail').on('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#previewImg').attr('src', e.target.result).removeClass('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Save the category using Axios
+            saveButton.on('click', function() {
+                // Show spinner and disable button
+                loadingSpinner.removeClass('hidden');
+                saveButton.prop('disabled', true);
+
+                const formData = new FormData();
+                formData.append('name', $('#category_name').val());
+                formData.append('thumbnail', $('#thumbnail')[0].files[0]);
+
+                axios.post('{{ route('categories.store') }}', formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
                         }
+                    })
+                    .then(response => {
+                        $('#category_name').prop('disabled', true);
+                        $('#thumbnail').prop('disabled', true);
+
+                        toastr.success("Category saved successfully!");
+                        setTimeout(() => {
+                            window.location.href = '{{ route('category') }}';
+                        }, 2000);
+                        // window.location.href = '{{ route('category') }}';
+                    })
+                    .catch(error => {
+                        // Show error messages
+                        let errors = error.response.data.errors;
+                        errorContainer.show();
+                        errorContainer.text("*" + Object.values(errors).join('\n'));
+                    })
+                    .finally(() => {
+                        // Hide spinner and re-enable button
+                        loadingSpinner.addClass('hidden');
+                        saveButton.prop('disabled', false);
                     });
             });
         });

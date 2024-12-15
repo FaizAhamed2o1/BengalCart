@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Route;
 
 use App\Http\Controllers\Dashboard\DashboardViewController;
+use App\Http\Controllers\Dashboard\Settings\GeneralSettingsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +27,11 @@ Route::prefix('dashboard')->group(function() {
     Route::get('/add/slider', [DashboardViewController::class, 'addSlider'])->name('add.slider');
     Route::get('/product', [DashboardViewController::class, 'product'])->name('product');
     Route::get('/edit/slider', [DashboardViewController::class, 'editSlider'])->name('edit.slider');
+
+    // settings urls
+    Route::prefix('/settings')->group(function () {
+        Route::get('/general', [GeneralSettingsController::class, 'index'])->name('settings.general.index');
+    });
 });
 
 

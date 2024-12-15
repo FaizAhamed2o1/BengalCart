@@ -17,14 +17,14 @@
                 <!-- Category Name -->
                 <div class="mb-5">
                     <label for="category_name" class="block mb-2 text-sm font-medium text-gray-900">
-                        Category Name
+                        Category Name <span class="text-red-500 text-md">*</span>
                     </label>
                     <input type="text" id="category_name" name="name" value="{{ $category->name }}"
                         class="w-full shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                         placeholder="Enter Category Name" required />
+
                 </div>
 
-                <!-- Category Thumbnail -->
                 <!-- Category Thumbnail -->
                 <div class="mb-5">
                     <label for="thumbnail" class="block mb-2 text-sm font-medium text-gray-900">
@@ -32,6 +32,9 @@
                     </label>
                     <input type="file" id="thumbnail" name="thumbnail"
                         class="w-full shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3" />
+
+
+
                     <div id="imagePreview" class="mt-3">
                         @if (!empty($category->thumbnail))
                             <img id="previewImg" src="{{ asset('storage/' . $category->thumbnail) }}"
@@ -42,10 +45,17 @@
                         @endif
                     </div>
                 </div>
+                <div class="text-red-500 text-sm" id="errorContainer">*</div>
                 <!-- Buttons -->
                 <div class="flex flex-col sm:flex-row sm:justify-center gap-3">
                     <button type="button" id="saveCategory"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+                        class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+                        <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 mr-3 text-white"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                        </svg>
                         Save
                     </button>
                     <a href="{{ route('category') }}"
@@ -59,48 +69,62 @@
     </main>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
+            const errorContainer = $('#errorContainer');
+            errorContainer.hide();
+            const saveButton = $('#saveCategory');
+            const loadingSpinner = $('#loadingSpinner');
+
+            // console.log("container ase",errorContainer);
             // Preview the uploaded image or replace the existing one
-            $('#thumbnail').on('change', function (e) {
+            $('#thumbnail').on('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
                         $('#previewImg').attr('src', e.target.result).removeClass('hidden');
                     };
                     reader.readAsDataURL(file);
                 }
             });
-    
+
             // Save the category using Axios
-            $('#saveCategory').on('click', function () {
+            $('#saveCategory').on('click', function() {
+                loadingSpinner.removeClass('hidden');
+                saveButton.prop('disabled', true);
                 const formData = new FormData();
                 formData.append('name', $('#category_name').val());
-    
+
                 const thumbnail = $('#thumbnail')[0].files[0];
                 if (thumbnail) {
                     formData.append('thumbnail', thumbnail);
                 }
-    
+
                 axios.post('{{ route('categories.update', $category->id) }}', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                     .then(response => {
-                        alert(response.data.message);
-                        window.location.href = '{{ route('category') }}';
+                        $('#category_name').prop('disabled', true);
+                        $('#thumbnail').prop('disabled', true);
+
+                        toastr.success("Category saved successfully!");
+                        setTimeout(() => {
+                            window.location.href = '{{ route('category') }}';
+                        }, 2000);
                     })
                     .catch(error => {
-                        if (error.response && error.response.data.errors) {
-                            let errors = error.response.data.errors;
-                            alert(Object.values(errors).join('\n'));
-                        } else {
-                            alert('Something went wrong.');
-                        }
+                        let errors = error.response.data.errors;
+                        errorContainer.show();
+                        errorContainer.text("*" + Object.values(errors).join('\n'));
+                    })
+                    .finally(() => {
+                        // Hide spinner and re-enable button
+                        loadingSpinner.addClass('hidden');
+                        saveButton.prop('disabled', false);
                     });
             });
         });
     </script>
-    
 @endsection

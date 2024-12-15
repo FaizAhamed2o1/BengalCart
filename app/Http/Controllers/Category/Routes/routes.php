@@ -8,18 +8,18 @@ Route::prefix('/categories')
         // List all categories
         Route::get('/', [CategoryController::class, 'index'])
             ->name('categories.index');
-        
+
         // Create a new category
         Route::post('/', [CategoryController::class, 'store'])
             ->name('categories.store');
-        
+
         // Update an existing category
         Route::post('/update/{id}', [
             CategoryController::class, 'update'
         ])->name('categories.update');
-        
+
         // Delete a category
-        Route::delete('/{id}', [
+        Route::delete('/delete/{id}', [
             CategoryController::class, 'destroy'
         ])->name('categories.destroy');
 
