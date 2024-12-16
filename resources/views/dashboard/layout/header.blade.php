@@ -1,5 +1,5 @@
 <!-- Navbar Start -->
-<header class="header-container bg-white text-white p-2 flex flex-wrap items-center justify-between">
+<header class="header-container bg-black p-2 flex flex-wrap items-center justify-between">
 
     <div class="flex items-center space-x-2">
         <a href="{{route('dashboard')}}">

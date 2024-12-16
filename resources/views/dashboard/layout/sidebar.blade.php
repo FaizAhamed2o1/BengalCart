@@ -1,6 +1,9 @@
 <!-- Sidebar -->
-<aside id="sidebar" class="w-64 bg-white text-gray-800 flex flex-col lg:block fixed inset-0 lg:relative lg:flex-nowrap lg:w-64 transition-all duration-300 transform lg:translate-x-0 hidden lg:flex shadow-lg border-r">
+<aside id="sidebar" class="w-64 bg-green-100 text-gray-800 flex flex-col lg:block fixed inset-0 lg:relative lg:flex-nowrap lg:w-64 transition-all duration-300 transform lg:translate-x-0 hidden lg:flex shadow-lg border-r">
     <nav class="flex-1">
+        <a href="{{ route('dashboard') }}" class="block px-4 py-3 transition-all duration-200 hover:bg-gray-100 flex items-center">
+            <img class="w-[90px] h-[50px]" src="{{asset('asset/images/e-commerce_logo.png')}}" alt="">
+        </a>
         <!-- Dashboard Link -->
         <a href="{{ route('dashboard') }}" class="block px-4 py-3 transition-all duration-200 hover:bg-gray-100 flex items-center">
             <span class="material-icons text-lg">dashboard</span>
@@ -30,7 +33,7 @@
             </button>
             <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="bg-gray-50 rounded-md overflow-hidden border">
                 <a href="{{ route('category') }}" class="block px-6 py-2 hover:bg-gray-100">Manage Category</a>
-                <a href="#" class="block px-6 py-2 hover:bg-gray-100">Sub Category</a>
+                <a href="{{ route('sub-categories.index') }}" class="block px-6 py-2 hover:bg-gray-100">Sub Category</a>
             </div>
         </div>
 

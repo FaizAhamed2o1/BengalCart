@@ -22,7 +22,7 @@
     <!-- Main Wrapper -->
     <div class="flex flex-col h-screen">
         <!-- Header -->
-        @include('dashboard.layout.header')
+        {{-- @include('dashboard.layout.header') --}}
 
         <div class="flex flex-1 overflow-hidden">
 

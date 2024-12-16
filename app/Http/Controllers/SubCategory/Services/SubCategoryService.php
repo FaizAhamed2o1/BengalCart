@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\SubCategory\Services;
 
 use App\Models\SubCategory;
 
-class SubCategoryService 
+class SubCategoryService
 {
     protected $model;
 
@@ -27,6 +27,11 @@ class SubCategoryService
             ->orderBy('created_at', 'desc')
             ->with(['category:id,name'])
             ->paginate(15);
+    }
+
+    public function findSubCategoryById( $id )
+    {
+        return $this->model->findOrFail($id);
     }
 
     public function storeSubCategory( array $data )
