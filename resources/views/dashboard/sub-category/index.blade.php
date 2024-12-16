@@ -11,7 +11,7 @@
 
                 <a href="{{ route('sub-categories.create') }}"
                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 sm:px-5 sm:py-2.5 mb-4 inline-block dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Add Category
+                    Add Sub Category
                 </a>
             </div>
 
@@ -22,6 +22,7 @@
                     <tr>
                         <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">SL</th>
                         <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Sub Category</th>
+                        <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Assigned Category</th>
                         <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Action</th>
                     </tr>
                     </thead>
@@ -31,16 +32,18 @@
                             <tr class="bg-white border-b">
                                 <th scope="row"
                                     class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap sm:px-4 sm:py-3">
-                                    {{ $loop->iterations() }}
+                                    {{ $loop->iteration }}
                                 </th>
                                 <td class="px-2 py-2 sm:px-4 sm:py-3">{{ $sub->name }}</td>
+                                <td class="px-2 py-2 sm:px-4 sm:py-3">{{ $sub->category->name }}</td>
                                 <td class="px-2 py-2 sm:px-4 sm:py-3">
-                                    <a href="{{ route('edit.category', $category->id) }}"
+                                    <a href="{{ route('sub-categories.edit', $sub->id) }}"
                                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2 mb-2 inline-block dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
                                         Edit
                                     </a>
-                                    <button type="button" data-id="{{ $category->id }}"
-                                            class="delete-category-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2 mb-2 inline-block dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                    <button
+                                        id="deleteSub" type="button" data-id="{{ $sub->id }}"
+                                            class="delete-sub-category-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2 mb-2 inline-block dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                         Delete
                                     </button>
                                 </td>
@@ -78,32 +81,5 @@
         </div>
     </div>
 
-    <script>
-        $(document).on('click', '.delete-category-btn', function() {
-            const button = $(this); // Get the button
-            const categoryId = button.data('id'); // Get the category ID
-
-            if (!confirm('Are you sure you want to delete this category?')) {
-                return;
-            }
-            button.text('Deleting...').prop('disabled', true);
-
-            axios.delete(`/api/categories/delete/${categoryId}`)
-                .then(response => {
-                    console.log(response.status)
-                    if (response.status === 200) {
-                        button.closest('tr').remove();
-                        toastr.success(response.message || 'Category deleted successfully.');
-                    } else {
-                        toastr.error(response.message || 'Failed to delete the category.');
-                    }
-                })
-                .catch(error => {
-                    toastr.error('An error occurred. Please try again.');
-                })
-                .finally(() => {
-                    button.text('Delete').prop('disabled', false);
-                })
-        });
-    </script>
+    <script src="{{ asset('asset/js/dashboard/sub-category.js') }}"></script>
 @endsection
