@@ -50,17 +50,17 @@ class DashboardViewController extends Controller
     }
 
     // slider
-    public function slider(){
-        return view('dashboard.slider.index');
-    }
+    // public function slider(){
+    //     return view('dashboard.slider.index');
+    // }
 
-    public function addSlider(){
-        return view('dashboard.slider.create');
-    }
+    // public function addSlider(){
+    //     return view('dashboard.slider.create');
+    // }
 
-    public function editSlider(){
-        return view('dashboard.slider.update');
-    }
+    // public function editSlider(){
+    //     return view('dashboard.slider.update');
+    // }
 
 
 }
