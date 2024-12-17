@@ -63,7 +63,7 @@ class ProductController extends Controller
     }
 
     // Create a new product
-    public function store(ProductRequest $request) 
+    public function store(ProductRequest $request)
     {
         try {
             $validatedData = $request->validated();
