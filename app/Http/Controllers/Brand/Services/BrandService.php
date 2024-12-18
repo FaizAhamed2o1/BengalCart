@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Brand\Services;
 
 use App\Models\Brand;
 
-class BrandService 
+class BrandService
 {
     protected $model;
 
-    public function __construct( Brand $model ) 
+    public function __construct( Brand $model )
     {
         $this->model = $model;
     }
@@ -38,7 +38,7 @@ class BrandService
         return $brand->delete();
     }
 
-    // getting brand wise products
+    // getting brands wise products
     public function getBrandWiseProducts( $brandId )
     {
         return $this->model->where('id', $brandId)

@@ -51,7 +51,7 @@ class ProductRequest extends FormRequest
             'buying_price.required' => 'The buying price is required.',
             'selling_price.required' => 'The selling price is required.',
             'selling_price.gte' => 'The selling price must be greater than or equal to the buying price.',
-            'brand_id.required' => 'A valid brand is required.',
+            'brand_id.required' => 'A valid brands is required.',
             'category_id.required' => 'A valid category is required.',
             'main_image.required' => 'The main image URL is required.',
         ];

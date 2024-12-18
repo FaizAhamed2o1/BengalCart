@@ -20,8 +20,8 @@ Route::prefix('/products')
         Route::get('/subcategory/{subcategoryId}', [ProductController::class, 'getBySubCategory'])
             ->name('products.bySubCategory');
 
-        // Get products by brand
-        Route::get('/brand/{brandId}', [ProductController::class, 'getByBrand'])
+        // Get products by brands
+        Route::get('/brands/{brandId}', [ProductController::class, 'getByBrand'])
             ->name('products.byBrand');
 
         // Create a new product
