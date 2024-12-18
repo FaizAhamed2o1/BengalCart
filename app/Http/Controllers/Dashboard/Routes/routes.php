@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard\Route;
 
 use App\Http\Controllers\Dashboard\DashboardViewController;
+use App\Http\Controllers\Dashboard\Settings\GeneralSettingsController;
+use App\Http\Controllers\Dashboard\SubCategory\SubCategoryViewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,7 +19,7 @@ Route::prefix('dashboard')->group(function() {
     // category
     Route::get('/category', [DashboardViewController::class, 'category'])->name('category');
     Route::get('/create/category', [DashboardViewController::class, 'createCategory'])->name('create.category');
-    Route::get('/edit/category', [DashboardViewController::class, 'editCategory'])->name('edit.category');
+    Route::get('/edit/category/{categoryId}', [DashboardViewController::class, 'editCategory'])->name('edit.category');
 
     // brand
     Route::get('/brand', [DashboardViewController::class, 'brand'])->name('brand');
@@ -29,8 +31,17 @@ Route::prefix('dashboard')->group(function() {
     Route::get('/add/slider', [DashboardViewController::class, 'addSlider'])->name('add.slider');
     Route::get('/edit/slider', [DashboardViewController::class, 'editSlider'])->name('edit.slider');
 
-    // product
-    Route::get('/product', [DashboardViewController::class, 'product'])->name('product');
+    // sub categories url
+    Route::prefix('/sub-categories')->group(function () {
+        Route::get('/', [ SubCategoryViewController::class, 'index' ])->name('sub-categories.index');
+        Route::get('/create', [ SubCategoryViewController::class, 'create' ])->name('sub-categories.create');
+        Route::get('/edit/{id}', [ SubCategoryViewController::class, 'edit' ])->name('sub-categories.edit');
+    });
+
+    // settings urls
+    Route::prefix('/settings')->group(function () {
+        Route::get('/general', [GeneralSettingsController::class, 'index'])->name('settings.general.index');
+    });
 });
 
 

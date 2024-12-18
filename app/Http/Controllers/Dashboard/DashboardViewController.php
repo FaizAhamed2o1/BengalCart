@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Category\Services\CategoryService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardViewController extends Controller
 {
+
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     public function index (){
         return view('dashboard.main.dashboard');
     }
@@ -24,13 +31,22 @@ class DashboardViewController extends Controller
 
     // Category
     public function category(){
-        return view('dashboard.category.index');
+        $breadcrumbs = generateBreadcrumbs();
+        $categories = $this->categoryService->getCategories();
+        return view('dashboard.category.index', compact('breadcrumbs', 'categories'));
     }
     public function createCategory(){
-        return view('dashboard.category.create');
+        $breadcrumbs = generateBreadcrumbs();
+        return view('dashboard.category.create', compact('breadcrumbs'));
     }
-    public function editCategory(){
-        return view('dashboard.category.update');
+    public function editCategory($categoryId)
+    {
+        $breadcrumbs = generateBreadcrumbs();
+        $category = $this->categoryService->getCategoryById($categoryId);
+        return view('dashboard.category.update', [
+            'breadcrumbs' => $breadcrumbs,
+            'category' => $category
+        ]);
     }
 
     // Brand
@@ -61,6 +77,7 @@ class DashboardViewController extends Controller
     // public function editSlider(){
     //     return view('dashboard.slider.update');
     // }
+
 
 
 }

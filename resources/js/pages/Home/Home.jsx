@@ -17,7 +17,7 @@ const Home = () => {
             />
 
             <ShopByCategory />
-            <div className="my-5 container mx-auto w-full md:w-full p-5 md:p-0">
+            <div className="my-5 container md:mx-auto p-5 md:p-0">
                 <h1 className="my-5 text-2xl text-center font-semibold">More To Love</h1>
 
                 <div className="flex flex-wrap items-center justify-center gap-5">

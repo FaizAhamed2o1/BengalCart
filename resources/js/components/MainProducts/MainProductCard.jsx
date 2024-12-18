@@ -2,7 +2,7 @@ import React from "react";
 
 const MainProductCard = () => {
     return (
-        <div className="w-[270px] p-4 bg-white rounded-lg shadow-lg border border-gray-200">
+        <div className="w-full md:w-[270px] p-4 bg-white rounded-lg shadow-lg border border-gray-200">
             {/* Product Image */}
             <div className="relative">
                 <img

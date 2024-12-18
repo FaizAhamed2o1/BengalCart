@@ -23,7 +23,7 @@ class CategoryController extends Controller
 
     /**
      * Display a listing of categories.
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(): JsonResponse
@@ -45,6 +45,14 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request): JsonResponse
     {
         $data = $request->validated();
+
+        if ($request->hasFile('thumbnail')) {
+//            dd("Hii");
+            $path = $request->file('thumbnail')->store('categories', 'public');
+
+            $data['thumbnail'] = $path;
+        }
+//        dd($data);
         $category = $this->categoryService->createCategory($data);
 
         return response()->json([
@@ -64,6 +72,13 @@ class CategoryController extends Controller
     {
         // dd($request->all());
         $data = $request->validated();
+
+        if( $request->hasFile('thumbnail') )
+        {
+            $path = $request->file('thumbnail')->store('categories', 'public');
+            $data['thumbnail'] = $path;
+        }
+        
         $this->categoryService
             ->updateCategory($id, $data);
 

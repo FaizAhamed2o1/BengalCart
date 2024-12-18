@@ -17,7 +17,7 @@ class CategoryService
     {
         return $this->model
             ->orderBy('created_at', 'desc')
-            ->paginate();
+            ->paginate(15);
     }
 
     public function getCategoryWithSubCategories($categoryId)
@@ -25,6 +25,11 @@ class CategoryService
         return $this->model->where('id', $categoryId)
             ->with('subcategories')
             ->paginate();
+    }
+
+    public function getCategoryById($categoryId)
+    {
+        return $this->model->findOrFail($categoryId);
     }
 
     public function createCategory( array $data )

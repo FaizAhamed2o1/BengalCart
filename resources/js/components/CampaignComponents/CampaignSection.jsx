@@ -35,6 +35,27 @@ export default function CampaignSection ({ title, sectionTitle1, sectionTitle2 }
                             pagination={{clickable: true}}
                             onSlideChange={() => console.log('slide change')}
                             onSwiper={(swiper) => console.log(swiper)}
+                            breakpoints={{
+                                320: {
+                                    slidesPerView: 1,
+                                    spaceBetween: 20,
+                                },
+                                640: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20,
+                                },
+                                // When the window width is >= 768px
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 30,
+                                },
+                                // When the window width is >= 1024px
+                                1024: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 40,
+                                },
+
+                            }}
                         >
                             <SwiperSlide>
                                 <CampaignProductCard
@@ -120,6 +141,27 @@ export default function CampaignSection ({ title, sectionTitle1, sectionTitle2 }
                                 pagination={{clickable: true}}
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}
+                                breakpoints={{
+                                    320: {
+                                        slidesPerView: 1,
+                                        spaceBetween: 20,
+                                    },
+                                    640: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 20,
+                                    },
+                                    // When the window width is >= 768px
+                                    768: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 30,
+                                    },
+                                    // When the window width is >= 1024px
+                                    1024: {
+                                        slidesPerView: 5,
+                                        spaceBetween: 40,
+                                    },
+
+                                }}
                             >
                                 <SwiperSlide>
                                     <CampaignProductCard
