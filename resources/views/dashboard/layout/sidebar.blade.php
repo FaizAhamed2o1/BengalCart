@@ -97,7 +97,7 @@
                 <span class="material-icons ml-auto text-lg transform transition-transform" :class="open ? 'rotate-180' : ''">expand_more</span>
             </button>
             <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="bg-gray-50 rounded-md overflow-hidden border">
-                <a href="{{ route('category') }}" class="block px-6 py-2 hover:bg-gray-100">Manage Slider</a>
+                <a href="{{ route('sliders.index') }}" class="block px-6 py-2 hover:bg-gray-100">Manage Slider</a>
 {{--                <a href="#" class="block px-6 py-2 hover:bg-gray-100">Sub Category</a>--}}
             </div>
         </div>
