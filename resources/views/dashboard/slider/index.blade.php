@@ -6,10 +6,13 @@
         <h1 class="text-2xl font-semibold mb-4 text-center">Sliders</h1>
         <div class="bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 mx-2 sm:mx-6 lg:mx-10">
             <!-- Add Slider Button -->
-            <a href="{{ route('sliders.create') }}"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 sm:px-5 sm:py-2.5 mb-4 inline-block dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                Add Slider
-            </a>
+            <div class="flex justify-end">
+                <a href="{{ route('sliders.create') }}"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 sm:px-5 sm:py-2.5 mb-4 inline-block dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    Add Slider
+                </a>
+            </div>
+
 
             <!-- Table Wrapper -->
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
@@ -20,7 +23,7 @@
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Slider Name</th>
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Image</th>
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Index</th>
-                            
+
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Action</th>
                         </tr>
                     </thead>
