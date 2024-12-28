@@ -61,17 +61,14 @@ class DashboardViewController extends Controller
     }
 
     // Brand
-    public function brand()
-    {
-        return view('dashboard.brand.index');
+    public function brand(){
+        return view('dashboard.brands.index');
     }
-    public function createBrand()
-    {
-        return view('dashboard.brand.create');
+    public function createBrand(){
+        return view('dashboard.brands.create');
     }
-    public function editBrand()
-    {
-        return view('dashboard.brand.update');
+    public function editBrand(){
+        return view('dashboard.brands.update');
     }
 
     // Product
@@ -80,7 +77,6 @@ class DashboardViewController extends Controller
         return view('dashboard.product.index');
     }
 
-    
     // slider
     public function slider()
     {

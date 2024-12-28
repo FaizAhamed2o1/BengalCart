@@ -31,21 +31,21 @@
                 </div>
 
                 <!-- Description -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="description" class="block text-sm font-medium text-gray-700">
                         Description
                     </label>
                     <textarea name="description" id="description" rows="4"
                         class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ old('description', $campaign->description) }}</textarea>
-                </div>
+                </div> --}}
 
                 <!-- Start Date -->
                 <div class="mb-4">
                     <label for="start_date" class="block text-sm font-medium text-gray-700">
                         Start Date
                     </label>
-                    <input type="date" name="start_date" id="start_date"
-                        value="{{ old('start_date', $campaign->start_date) }}"
+                    <input type="datetime" name="start_date" id="start_date"
+                        value="{{ $campaign->start_date }}"
                         class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                         required>
                 </div>
@@ -55,7 +55,7 @@
                     <label for="end_date" class="block text-sm font-medium text-gray-700">
                         End Date
                     </label>
-                    <input type="date" name="end_date" id="end_date"
+                    <input type="datetime" name="end_date" id="end_date"
                         value="{{ old('end_date', $campaign->end_date) }}"
                         class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                 </div>

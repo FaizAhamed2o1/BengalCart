@@ -45,7 +45,7 @@ class BrandController extends Controller
 
     public function show( string $id )
     {
-        // $brand = $this->brandService->
+        // $brands = $this->brandService->
     }
 
     /**

@@ -51,12 +51,12 @@ class ProductController extends Controller
         }
     }
 
-    // Get products by brand
+    // Get products by brands
     public function getByBrand($brandId)
     {
         try {
             $products = $this->productService->getProductsByBrand($brandId);
-            return $this->successResponse($products, 'Products by brand retrieved successfully');
+            return $this->successResponse($products, 'Products by brands retrieved successfully');
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage(), 500);
         }

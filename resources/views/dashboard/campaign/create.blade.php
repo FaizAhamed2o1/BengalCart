@@ -39,14 +39,14 @@
                 </div>
 
                 <!-- Description -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="description" class="block text-sm font-medium text-gray-700">
                         Description
                     </label>
                     <textarea name="description" id="description" rows="4"
                         class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                         placeholder="Enter campaign description">{{ old('description') }}</textarea>
-                </div>
+                </div> --}}
 
                 <!-- Start Date -->
                 <div class="mb-4">
@@ -73,7 +73,7 @@
                     <label for="thumbnail" class="block text-sm font-medium text-gray-700">
                         Thumbnail (Optional)
                     </label>
-                    <input type="file" name="thumbnail" id="thumbnail"
+                    <input type="file" name="campaign_image" id="thumbnail"
                         class="block w-full mt-1 text-gray-500 file:bg-gray-100 file:border-gray-300 file:text-gray-700 file:px-4 file:py-2 file:rounded-lg file:shadow-sm">
                 </div>
 

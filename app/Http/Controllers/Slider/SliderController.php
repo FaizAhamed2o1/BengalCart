@@ -4,9 +4,18 @@ namespace App\Http\Controllers\Slider;
 use App\Http\Controllers\Controller;
 use App\Models\MainSlider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class SliderController extends Controller
 {
+    protected $breadcrumbs;
+
+    public function __construct()
+    {
+        $this->breadcrumbs = generateBreadcrumbs();
+        View::share('breadcrumbs', $this->breadcrumbs);
+    }
+
     public function index()
     {
         $sliders = MainSlider::paginate(10);
