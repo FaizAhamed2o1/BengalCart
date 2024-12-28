@@ -12,17 +12,19 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('dashboard')->group(function() {
     Route::get('/', [DashboardViewController::class, 'index'])->name('dashboard');
 
+    // user route
     Route::get('/user', [DashboardViewController::class, 'user'])->name('user');
     Route::get('/edit/user', [DashboardViewController::class, 'editUser'])->name('edit.user');
     Route::get('/create/user', [DashboardViewController::class, 'createUser'])->name('create.user');
 
+    // category
     Route::get('/category', [DashboardViewController::class, 'category'])->name('category');
     Route::get('/create/category', [DashboardViewController::class, 'createCategory'])->name('create.category');
     Route::get('/edit/category/{categoryId}', [DashboardViewController::class, 'editCategory'])->name('edit.category');
 
+    // slider
     Route::get('/slider', [DashboardViewController::class, 'slider'])->name('slider');
     Route::get('/add/slider', [DashboardViewController::class, 'addSlider'])->name('add.slider');
-    Route::get('/product', [DashboardViewController::class, 'product'])->name('product');
     Route::get('/edit/slider', [DashboardViewController::class, 'editSlider'])->name('edit.slider');
 
     // sub categories url
