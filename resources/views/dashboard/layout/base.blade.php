@@ -22,7 +22,6 @@
     <!-- Main Wrapper -->
     <div class="flex flex-col h-screen">
         <!-- Header -->
-        {{-- @include('dashboard.layout.header') --}}
 
         <div class="flex flex-1 overflow-hidden">
 
@@ -30,13 +29,9 @@
             @include('dashboard.layout.sidebar')
 
             <!-- Main Content -->
-            @yield('content') <!-- This is where the page content will be injected -->
+            @yield('content')
 
         </div>
-        <!-- Footer -->
-{{--        <footer class="bg-gray-800 text-white p-4 text-center">--}}
-{{--            &copy; 2024 Admin Dashboard.--}}
-{{--        </footer>--}}
 
         <!-- Include JavaScript files -->
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
