@@ -77,7 +77,6 @@ class DashboardViewController extends Controller
         return view('dashboard.product.index');
     }
 
-    
     // slider
     public function slider()
     {

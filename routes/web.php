@@ -10,7 +10,6 @@ require_once base_path(
   'app/Http/Controllers/Dashboard/Routes/routes.php'
 );
 
-
 // sliders routes
 require_once base_path(
     'app/Http/Controllers/Slider/Routes/routes.php');

@@ -19,7 +19,7 @@
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-xs sm:text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead
-                        class="text-xs sm:text-sm text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        class="text-xs sm:text-sm text-gray-700 uppercase bg-gray-300">
                         <tr>
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">SL.</th>
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Brand Name</th>
@@ -31,9 +31,9 @@
                     <tbody>
                     @if( $data )
                         @foreach($data as $dt)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr class="bg-white border-b">
                                 <th scope="row"
-                                    class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white sm:px-4 sm:py-3">
+                                    class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap sm:px-4 sm:py-3">
                                     {{ $loop->iteration }}
                                 </th>
                                 <td class="px-2 py-2 sm:px-4 sm:py-3">{{ $dt->brand_name }}</td>
@@ -74,15 +74,18 @@
 
     <script>
         $(document).on('click', '.delete-brand-btn', function() {
-            const button = $(this); // Get the button
-            const brandId = button.data('id'); // Get the category ID
-
+            const button = $(this);
+            const brandId = button.data('id');
+            if(!brandId) {
+                return;
+            }
             if (!confirm('Are you sure you want to delete this category?')) {
                 return;
             }
             button.text('Deleting...').prop('disabled', true);
+            const deleteUrl = `{{ route("brands.delete", ":id") }}`.replace(':id', brandId);
 
-            axios.delete(`{{ route("brands.delete", $dt->id) }}`)
+            axios.delete(deleteUrl)
                 .then(response => {
                     // console.log(response.status)
                     if (response.status === 200) {

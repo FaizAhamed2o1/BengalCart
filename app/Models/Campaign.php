@@ -11,7 +11,9 @@ class Campaign extends Model
     use HasFactory;
 
     protected $fillable = [
-        'campaign_name'
+        'campaign_name',
+        'start_date',
+        'end_date',
     ];
 
     public function products()

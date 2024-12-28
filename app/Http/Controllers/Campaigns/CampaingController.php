@@ -23,14 +23,13 @@ class CampaingController extends Controller
     {
         $validated = $request->validate([
             'campaign_name' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
-            'thumbnail' => 'nullable|image|max:2048',
+            'campaign_image' => 'nullable|image|max:2048',
         ]);
 
-        if ($request->hasFile('thumbnail')) {
-            $validated['thumbnail'] = $request->file('thumbnail')->store('campaigns', 'public');
+        if ($request->hasFile('campaign_image')) {
+            $validated['campaign_image'] = $request->file('campaign_image')->store('campaigns', 'public');
         }
 
         Campaign::create($validated);
@@ -54,13 +53,18 @@ class CampaingController extends Controller
     {
         $campaign = Campaign::findOrFail($id);
 
-        $request->validate([
+        $validated = $request->validate([
             'campaign_name' => 'required|unique:campaigns,campaign_name,' . $campaign->id . '|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'campaign_image' => 'nullable|image|max:2048',
         ]);
 
-        $campaign->update([
-            'campaign_name' => $request->input('campaign_name'),
-        ]);
+        if ($request->hasFile('campaign_image')) {
+            $validated['campaign_image'] = $request->file('campaign_image')->store('campaigns', 'public');
+        }
+
+        $campaign->update([$validated]);
 
         return redirect()->route('campaigns.index')->with('success', 'Campaign updated successfully.');
     }

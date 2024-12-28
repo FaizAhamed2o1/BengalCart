@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Route;
 
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\DashboardViewController;
+use App\Http\Controllers\Dashboard\Product\ProductViewController;
 use App\Http\Controllers\Dashboard\Settings\GeneralSettingsController;
 use App\Http\Controllers\Dashboard\SubCategory\SubCategoryViewController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,17 @@ Route::prefix('dashboard')->group(function() {
         Route::get('/{id}/edit', [BrandController::class, 'edit'])->name('brands.edit');
         Route::post('/{id}', [BrandController::class, 'update'])->name('brands.update');
         Route::delete('/{id}', [BrandController::class, 'destroy'])->name('brands.delete');
+    });
+
+    // products Url
+    Route::prefix('/products')->group(function () {
+        Route::get('/', [ProductViewController::class, 'index'])->name('products.index');
+        Route::get('/create', [ProductViewController::class, 'create'])->name('products.create');
+        Route::post('/store', [ProductViewController::class, 'store'])->name('products.store');
+        Route::get('/{id}', [ProductViewController::class, 'show'])->name('products.show');
+        Route::get('/{id}/edit', [ProductViewController::class, 'edit'])->name('products.edit');
+        Route::post('/{id}', [ProductViewController::class, 'update'])->name('products.update');
+        Route::delete('/{id}', [ProductViewController::class, 'destroy'])->name('products.delete');
     });
 
     // settings urls

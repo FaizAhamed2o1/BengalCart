@@ -6,40 +6,40 @@
         <h1 class="text-xl sm:text-2xl font-semibold mb-4 text-center">Edit Slider</h1>
         <div class="bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 mx-2 sm:mx-4 lg:mx-6 xl:mx-10">
             <!-- Responsive Form -->
-            <form action="{{ route('sliders.update', $slider->id) }}" method="POST" enctype="multipart/form-data" class="max-w-md lg:max-w-lg mx-auto">
+            <form action="{{ route('sliders.update', $slider->id) }}" method="POST" enctype="multipart/form-data" class="">
                 @csrf
                 @method('PUT') <!-- Specify PUT method for updates -->
 
                 <!-- Slider Name -->
                 <div class="mb-5">
-                    <label for="slider-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="slider-name" class="block mb-2 text-sm font-medium text-gray-900">
                         Slider Name
                     </label>
                     <input type="text" id="slider-name" name="title"
                         value="{{ $slider->title }}"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 "
                         placeholder="Enter Slider Name" required />
                 </div>
 
                 <!-- Slider Image -->
                 <div class="mb-5">
-                    <label for="slider-image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="slider-image" class="block mb-2 text-sm font-medium text-gray-900 ">
                         Slider Image
                     </label>
                     <input type="file" id="slider-image" name="image"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 " />
                     <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Current: <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}"
                         class="h-10 w-10 object-cover rounded">
                 </div>
 
                 <!-- Index -->
                 <div class="mb-5">
-                    <label for="index" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="index" class="block mb-2 text-sm font-medium text-gray-900 ">
                         Index
                     </label>
                     <input type="text" id="index" name="index"
                         value="{{ $slider->index }}"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 "
                         placeholder="Enter Index" required />
                 </div>
 

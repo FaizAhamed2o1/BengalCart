@@ -18,7 +18,7 @@
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-xs sm:text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead
-                        class="text-xs sm:text-sm text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        class="text-xs sm:text-sm text-gray-700 uppercase bg-gray-300">
                         <tr>
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Slider Name</th>
                             <th scope="col" class="px-2 py-2 sm:px-4 sm:py-3">Image</th>
@@ -29,10 +29,10 @@
                     </thead>
                     <tbody>
                         @forelse ($sliders as $slider)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr class="bg-white border-b">
                                 <th scope="row"
-                                    class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white sm:px-4 sm:py-3">
-                                    {{ $slider->title }}
+                                    class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap sm:px-4 sm:py-3">
+                                    {{ $slider->title ?? "N/A" }}
                                 </th>
                                 <td class="px-2 py-2 sm:px-4 sm:py-3">
                                     <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}"
