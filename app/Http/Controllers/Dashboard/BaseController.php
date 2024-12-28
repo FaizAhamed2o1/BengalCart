@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +23,8 @@ class BaseController extends Controller
     protected $relationships = [];
     protected $imageFieldName = '';
     protected $directoryName = '';
+
+    protected $additionalData = [];
 
     public function __construct()
     {
@@ -48,7 +53,7 @@ class BaseController extends Controller
                 $relatedIds = $data[$relation];
                 DB::table($pivotTable)
                     ->where($this->table . '_id', $id)
-                    ->delete(); // Clear existing relations
+                    ->delete();
                 foreach ($relatedIds as $relatedId) {
                     DB::table($pivotTable)->insert([
                         $this->table . '_id' => $id,
@@ -59,10 +64,19 @@ class BaseController extends Controller
         }
     }
 
+    protected function getAdditionalData()
+    {
+        return [
+            'brands' => Brand::all(),
+            'categories' => Category::all(),
+            'subCategories' => SubCategory::all(),
+        ];
+    }
+
+
     public function index(Request $request)
     {
         $data = DB::table($this->table)->select($this->columns);
-
         // Apply dynamic filters
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $this->columns) && !is_null($value)) {
@@ -84,13 +98,13 @@ class BaseController extends Controller
             return response()->json($data);
         }
 
-        return view($this->viewPath . '.index', [
+        return view($this->viewPath . '.index', array_merge([
             'data' => $data,
             'breadcrumbs' => $this->breadcrumbs,
             'filters' => $request->all(),
             'sortColumn' => $sortColumn,
             'sortOrder' => $sortOrder,
-        ]);
+        ], $this->getAdditionalData()));
     }
 
     public function create(Request $request)
@@ -98,18 +112,22 @@ class BaseController extends Controller
         if ($request->expectsJson()) {
             return response()->json(['message' => 'Display create form here'], 200);
         }
-
-        return view($this->viewPath . '.create', [
-            'breadcrumbs' => $this->breadcrumbs
-        ]);
+        return view(
+            $this->viewPath . '.create',
+            array_merge(
+                [
+                    'breadcrumbs' => $this->breadcrumbs
+                ],
+                $this->getAdditionalData()
+            )
+        );
     }
 
     public function store(Request $request)
     {
-        // Validate input
+        // dd($request->all());
         $validated = $request->validate($this->validationRules);
 
-        // Handle image uploads
         if ($this->imageFieldName && $request->hasFile($this->imageFieldName)) {
             $path = $this->handleImageUpload($request, $this->imageFieldName, 'uploads');
             if ($path) {
@@ -118,10 +136,14 @@ class BaseController extends Controller
         }
 
         // Insert into the database
-        $id = DB::table($this->table)->insertGetId($validated);
+        if (!empty($this->relationships)) {
+            $id = DB::table($this->table)
+                ->insertGetId($validated);
 
-        // Sync relationships
-        $this->syncRelationships($id, $request->all());
+            if ($id) {
+                $this->syncRelationships($id, $request->all());
+            }
+       }
 
         // Return response
         if ($request->expectsJson()) {
@@ -188,12 +210,12 @@ class BaseController extends Controller
         $this->syncRelationships($id, $request->all());
 
         // Handle response
-//        if (!$updated) {
-//            if ($request->expectsJson()) {
-//                return response()->json(['message' => 'Record not updated'], 400);
-//            }
-//            return redirect()->back()->with('error', 'Record not updated');
-//        }
+        //        if (!$updated) {
+        //            if ($request->expectsJson()) {
+        //                return response()->json(['message' => 'Record not updated'], 400);
+        //            }
+        //            return redirect()->back()->with('error', 'Record not updated');
+        //        }
 
         if ($request->expectsJson()) {
             return response()->json(['message' => 'Record updated successfully']);
@@ -220,6 +242,4 @@ class BaseController extends Controller
 
         return redirect()->back()->with('success', 'Record deleted successfully!');
     }
-
-
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Dashboard\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\BaseController;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class ProductViewController extends BaseController
@@ -41,7 +44,7 @@ class ProductViewController extends BaseController
         'main_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         'multi_images' => 'nullable|array',
         'multi_images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
-        'video_url' => 'nullable|url',
+        'video_url' => 'nullable|string',
         'stock_amount' => 'required|integer|min:0',
         'is_out_of_stock' => 'required|boolean',
         'brand_id' => 'nullable|exists:brands,id',
@@ -54,5 +57,4 @@ class ProductViewController extends BaseController
     protected $paginationLimit = 20;
     protected $sortBy = 'desc';
     protected $imageFieldName = 'main_image';
-
 }
