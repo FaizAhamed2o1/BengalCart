@@ -5,36 +5,37 @@
     <title>BENGALCART</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
+   
     <link rel="icon" type="image/png" href="{{asset('frontend/images/icons/favicon.png')}}" />
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/bootstrap/css/bootstrap.min.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/fonts/iconic/css/material-design-iconic-font.min.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/fonts/linearicons-v1.0.0/icon-font.min.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/animate/animate.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/css-hamburgers/hamburgers.min.css')}}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/animsition/css/animsition.min.css')}}">
-    <!--===============================================================================================-->
+   
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/animsition/css/animsition.min.css')}}"> --}}
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/select2/select2.min.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/daterangepicker/daterangepicker.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/slick/slick.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/MagnificPopup/magnific-popup.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
-    <!--===============================================================================================-->
+   
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/main.css')}}">
-    <!--===============================================================================================-->
+    
+   
 </head>
 
 <body class="animsition">
@@ -75,7 +76,7 @@
 
                     <!-- Logo desktop -->
                     <a href="#" class="logo">
-                        <img src="images/icons/logo-01.png" alt="IMG-LOGO">
+                        <img src="{{ asset('frontend/images/icons/logo-01.png') }}" alt="IMG-LOGO">
                     </a>
 
                     <!-- Menu desktop -->
@@ -137,7 +138,7 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile">
-                <a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+                <a href="index.html"><img src="{{asset('frontend/images/icons/logo-01.png')}}" alt="IMG-LOGO"></a>
             </div>
 
             <!-- Icon header -->
@@ -236,7 +237,7 @@
         <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
             <div class="container-search-header">
                 <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                    <img src="images/icons/icon-close2.png" alt="CLOSE">
+                    <img src="{{asset('frontend/images/icons/icon-close2.png')}}" alt="CLOSE">
                 </button>
 
                 <form class="wrap-search-header flex-w p-l-15">
@@ -268,7 +269,7 @@
                 <ul class="header-cart-wrapitem w-full">
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="images/item-cart-01.jpg" alt="IMG">
+                            <img src="{{ asset('frontend/images/item-cart-01.jpg') }}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt p-t-8">
@@ -284,7 +285,7 @@
 
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="images/item-cart-02.jpg" alt="IMG">
+                            <img src="{{ asset('frontend/images/item-cart-02.jpg') }}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt p-t-8">
@@ -300,7 +301,7 @@
 
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="images/item-cart-03.jpg" alt="IMG">
+                            <img src="{{ asset('frontend/images/item-cart-03.jp') }}g" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt p-t-8">
@@ -342,7 +343,7 @@
     <section class="section-slide">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url(images/slide-01.jpg);">
+                <div class="item-slick1" style="background-image: url('{{ asset('frontend/images/slide-01.jpg') }}');">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -367,7 +368,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url(images/slide-02.jpg);">
+                <div class="item-slick1" style="background-image: url({{ asset('frontend/images/slide-02.jpg') }});">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -394,7 +395,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url(images/slide-03.jpg);">
+                <div class="item-slick1" style="background-image: url({{ asset('images/slide-03.jpg') }});">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft"
@@ -433,7 +434,7 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="images/banner-01.jpg" alt="IMG-BANNER">
+                        <img src="{{ asset('frontend/images/banner-01.jpg') }}" alt="IMG-BANNER">
 
                         <a href="product.html"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -459,7 +460,7 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="images/banner-02.jpg" alt="IMG-BANNER">
+                        <img src="{{ asset('frontend/images/banner-02.jpg') }}" alt="IMG-BANNER">
 
                         <a href="product.html"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -485,7 +486,7 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="images/banner-03.jpg" alt="IMG-BANNER">
+                        <img src="{{ asset('frontend/images/banner-03.jpg') }}" alt="IMG-BANNER">
 
                         <a href="product.html"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -775,7 +776,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-01.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ asset('frontend/images/product-01.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -796,10 +797,10 @@
 
                             <div class="block2-txt-child2 flex-r p-t-3">
                                 <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
+                                    <img class="icon-heart1 dis-block trans-04" src="{{ asset('frontend/images/icons/icon-heart-01.png/') }}"
                                         alt="ICON">
                                     <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                        src="images/icons/icon-heart-02.png" alt="ICON">
+                                        src="{{ asset('frontend/images/icons/icon-heart-02.png') }}" alt="ICON">
                                 </a>
                             </div>
                         </div>
@@ -1286,7 +1287,7 @@
 
                             <div class="block2-txt-child2 flex-r p-t-3">
                                 <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
+                                    <img class="icon-heart1 dis-block trans-04" src="{{asset('images/icons/icon-heart-01.png')}}"
                                         alt="ICON">
                                     <img class="icon-heart2 dis-block trans-04 ab-t-l"
                                         src="images/icons/icon-heart-02.png" alt="ICON">
@@ -1670,15 +1671,15 @@
         </div>
     </div>
 
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/animsition/js/animsition.min.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/bootstrap/js/popper.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/animsition/js/animsition.min.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/bootstrap/js/popper.js')}}"></script>
+    <script src="{{asset('frontend/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/select2/select2.min.js')}}"></script>
     <script>
         $(".js-select2").each(function() {
             $(this).select2({
@@ -1687,19 +1688,19 @@
             });
         })
     </script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/daterangepicker/moment.min.js')}}"></script>
-    <script src="{{asset('vendor/daterangepicker/daterangepicker.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/slick/slick.min.js')}}"></script>
-    <script src="{{asset('js/slick-custom.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/parallax100/parallax100.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/daterangepicker/moment.min.js')}}"></script>
+    <script src="{{asset('frontend/vendor/daterangepicker/daterangepicker.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/slick/slick.min.js')}}"></script>
+    <script src="{{asset('frontend/js/slick-custom.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/parallax100/parallax100.js')}}"></script>
     <script>
         $('.parallax100').parallax100();
     </script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/MagnificPopup/jquery.magnific-popup.min.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/MagnificPopup/jquery.magnific-popup.min.js')}}"></script>
     <script>
         $('.gallery-lb').each(function() { // the containers for all your galleries
             $(this).magnificPopup({
@@ -1712,10 +1713,11 @@
             });
         });
     </script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/isotope/isotope.pkgd.min.js')}}"></script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
+    
+    
+    <script src="{{asset('frontend/vendor/isotope/isotope.pkgd.min.js')}}"></script>
+    
+    <script src="{{asset('frontend/vendor/sweetalert/sweetalert.min.js')}}"></script>
     <script>
         $('.js-addwish-b2').on('click', function(e) {
             e.preventDefault();
@@ -1751,8 +1753,8 @@
             });
         });
     </script>
-    <!--===============================================================================================-->
-    <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    
+    <script src="{{asset('frontned/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
     <script>
         $('.js-pscroll').each(function() {
             $(this).css('position', 'relative');
@@ -1768,8 +1770,8 @@
             })
         });
     </script>
-    <!--===============================================================================================-->
-    <script src="{{asset('js/main.js')}}"></script>
+    
+    <script src="{{asset('frontend/js/main.js')}}"></script>
 
 </body>
 
